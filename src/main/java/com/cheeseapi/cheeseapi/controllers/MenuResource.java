@@ -32,7 +32,7 @@ public class MenuResource {
      */
     @ApiOperation("Returns list of all Menus in the system")
     @GetMapping(value = "")
-    public ResponseEntity<Iterable<Menu>> getMenus() {
+    public ResponseEntity getMenus() {
 
         return ResponseEntity.ok(menuDao.findAll());
 
