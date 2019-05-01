@@ -19,11 +19,11 @@ public class Cheese {
     private int id;
 
     @NotNull
-    @Size(min = 3, max = 15, message = "Cheese name must be between 3 and 15 characters")
+    @Size(min = 3, max = 20, message = "Cheese name must be between 3 and 20 characters")
     private String name;
 
     @NotNull
-    @Size(min= 1, max = 30, message = "Description must not be empty")
+    @Size(min= 1, max = 100, message = "Description must not be empty")
     private String description;
 
 
