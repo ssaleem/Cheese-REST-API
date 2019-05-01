@@ -16,7 +16,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "menus")
-public class MenuController {
+public class MenuResource {
 
     @Autowired
     private MenuDao menuDao;
@@ -96,7 +96,7 @@ public class MenuController {
      */
     @ApiOperation("Returns cheeses from a specific menu by its identifier. 404 if menu does not exist")
     @GetMapping(value = "{menuId}/cheeses")
-    public ResponseEntity<Iterable<Cheese>> getCheesesFromMenu(@PathVariable int menuId) {
+    public ResponseEntity getCheesesFromMenu(@PathVariable int menuId) {
 
         Menu existingMenu = menuDao.findOne(menuId);
 
