@@ -32,6 +32,7 @@ public class MenuResource {
      */
     @ApiOperation("Returns list of all Menus in the system")
     @GetMapping(value = "")
+    @CrossOrigin
     public ResponseEntity getMenus() {
 
         return ResponseEntity.ok(menuDao.findAll());
@@ -49,6 +50,7 @@ public class MenuResource {
 
     @ApiOperation("Creates a new menu and adds it to Menus, returns newly created menu and its URL. 400 if invalid parameters")
     @PostMapping(value = "")
+    @CrossOrigin
     public ResponseEntity<Menu> addMenu(@RequestBody @Valid Menu menu) {
 
         menuDao.save(menu);
@@ -73,6 +75,7 @@ public class MenuResource {
      */
     @ApiOperation("Returns a specific menu by its identifier. 404 if does not exist")
     @GetMapping(value = "{menuId}")
+    @CrossOrigin
     public ResponseEntity<Menu> getMenuById(@PathVariable int menuId) {
 
         Menu menu = menuDao.findOne(menuId);
@@ -96,6 +99,7 @@ public class MenuResource {
      */
     @ApiOperation("Returns cheeses from a specific menu by its identifier. 404 if menu does not exist")
     @GetMapping(value = "{menuId}/cheeses")
+    @CrossOrigin
     public ResponseEntity getCheesesFromMenu(@PathVariable int menuId) {
 
         Menu existingMenu = menuDao.findOne(menuId);
@@ -140,6 +144,7 @@ public class MenuResource {
 
     @ApiOperation("Adds cheese/s to a menu, returns updated menu. 404 if menu or cheese does not exist")
     @PostMapping(value = "{menuId}/cheeses")
+    @CrossOrigin
     public ResponseEntity addCheesestoMenu(@PathVariable int menuId, @RequestBody int[] cheeseIds) {
 
         Menu existingMenu = menuDao.findOne(menuId);
@@ -162,6 +167,7 @@ public class MenuResource {
 
     @ApiOperation("Deletes a cheese from the menu by its identifier. 404 if menu or cheese does not exist")
     @DeleteMapping(value = "{menuId}/cheeses/{cheeseId}")
+    @CrossOrigin
     public ResponseEntity deleteCheeseFromMenu(@PathVariable int cheeseId, @PathVariable int menuId){
 
         Menu menu = menuDao.findOne(menuId);

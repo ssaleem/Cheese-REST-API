@@ -35,6 +35,7 @@ public class CheeseResource {
             response = Cheese.class,
             responseContainer = "List")
     @GetMapping(value = "")
+    @CrossOrigin
     public ResponseEntity getCheeses() {
 
         return ResponseEntity.ok().body(cheeseDao.findAll());
@@ -51,6 +52,7 @@ public class CheeseResource {
      */
     @ApiOperation("Creates a new cheese and adds it to Cheeses list, returns newly created cheese and its URL")
     @PostMapping(value = "")
+    @CrossOrigin
     public ResponseEntity addCheese(@RequestBody @Valid Cheese cheese) {
 
         cheeseDao.save(cheese);
@@ -74,6 +76,7 @@ public class CheeseResource {
      */
     @ApiOperation("Returns a specific cheese by its identifier. 404 if does not exist")
     @GetMapping(value = "{cheeseId}")
+    @CrossOrigin
     public ResponseEntity getCheeseById(@PathVariable int cheeseId){
         Cheese cheese = cheeseDao.findOne(cheeseId);
 
@@ -99,6 +102,7 @@ public class CheeseResource {
      */
     @ApiOperation("Updates and returns a specific cheese by its identifier. 404 if does not exist, 400 if invalid parameters")
     @PutMapping(value = "{cheeseId}")
+    @CrossOrigin
     public ResponseEntity<Cheese> updateCheeseById(
             @PathVariable int cheeseId,
             @RequestBody @Valid Cheese cheese) {
@@ -139,6 +143,7 @@ public class CheeseResource {
      */
     @ApiOperation("Deletes a cheese from the system by its identifier. 404 if does not exist")
     @DeleteMapping(value = "{cheeseId}")
+    @CrossOrigin
     public ResponseEntity deleteCheeseById(@PathVariable int cheeseId){
 
         if(!cheeseDao.exists(cheeseId)){
