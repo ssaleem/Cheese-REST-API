@@ -54,7 +54,7 @@ public class MenuController {
         menuDao.save(menu);
 
         UriComponents uriComponents = UriComponentsBuilder.newInstance()
-                .scheme("http").host("localhost").port("8080")
+                .scheme("http").host("cheesemvc-api.herokuapp.com")
                 .path("/menus/" + menu.getId())
                 .build();
 

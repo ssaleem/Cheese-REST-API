@@ -56,7 +56,7 @@ public class CheeseController {
         cheeseDao.save(cheese);
 
         UriComponents uriComponents = UriComponentsBuilder.newInstance()
-                .scheme("http").host("localhost").port("8080")
+                .scheme("http").host("cheesemvc-api.herokuapp.com")
                 .path("/cheeses/" + cheese.getId())
                 .build();
 
