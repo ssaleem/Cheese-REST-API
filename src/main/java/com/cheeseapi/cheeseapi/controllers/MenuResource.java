@@ -24,13 +24,10 @@ public class MenuResource {
     @Autowired
     private CheeseDao cheeseDao;
 
-    /**
-     * Get http://localhost:8080/menus
-     * Purpose: Get all menus
-     * status: 200
-     * body: json array of menus, [] if no items in menus
-     */
-    @ApiOperation("Returns list of all Menus in the system")
+    @ApiOperation(value = "Returns list of all Menus in the system",
+            produces = "application/json",
+            response = Menu.class,
+            responseContainer = "List")
     @GetMapping(value = "")
     @CrossOrigin
     public ResponseEntity getMenus() {

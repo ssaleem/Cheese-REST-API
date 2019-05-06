@@ -24,12 +24,6 @@ public class CheeseResource {
     @Autowired
     private CheeseDao cheeseDao;
 
-    /**
-     * Get http://localhost:8080/cheeses
-     * Purpose: Get all cheeses
-     * status: 200
-     * body: json array of cheeses, [] if no items in cheeses
-     */
     @ApiOperation(value = "Returns list of all Cheeses in the system",
             produces = "application/json",
             response = Cheese.class,
@@ -50,7 +44,8 @@ public class CheeseResource {
      * Location: http://localhost:8080/cheeses/{id_of_newly_created_cheese}
      * body: newly created cheese
      */
-    @ApiOperation("Creates a new cheese and adds it to Cheeses list, returns newly created cheese and its URL")
+    @ApiOperation(value = "Creates a new cheese and adds it to Cheeses list, returns newly created cheese and its URL",
+            response = Cheese.class)
     @PostMapping(value = "")
     @CrossOrigin
     public ResponseEntity addCheese(@RequestBody @Valid Cheese cheese) {
@@ -74,7 +69,8 @@ public class CheeseResource {
      * Failure (if ID not found or invalid)
      * status: 404
      */
-    @ApiOperation("Returns a specific cheese by its identifier. 404 if does not exist")
+    @ApiOperation(value = "Returns a specific cheese by its identifier. 404 if does not exist",
+            response = Cheese.class)
     @GetMapping(value = "{cheeseId}")
     @CrossOrigin
     public ResponseEntity getCheeseById(@PathVariable int cheeseId){
@@ -100,7 +96,8 @@ public class CheeseResource {
      * Failure (if ID not found or invalid)
      * status: 404
      */
-    @ApiOperation("Updates and returns a specific cheese by its identifier. 404 if does not exist, 400 if invalid parameters")
+    @ApiOperation(value = "Updates and returns a specific cheese by its identifier. 404 if does not exist, 400 if invalid parameters",
+            response = Cheese.class)
     @PutMapping(value = "{cheeseId}")
     @CrossOrigin
     public ResponseEntity<Cheese> updateCheeseById(
