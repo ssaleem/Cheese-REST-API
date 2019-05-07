@@ -32,8 +32,8 @@ public class Cheese {
     @Max(value = 5, message = "Rating must be between 1 and 5")
     private int rating;
 
-//    @ManyToOne
-//    private Category category;
+    @ManyToOne
+    private Category category;
 
     @ManyToMany(mappedBy = "cheeses")
     private List<Menu> menus;
@@ -79,6 +79,14 @@ public class Cheese {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @PreRemove
