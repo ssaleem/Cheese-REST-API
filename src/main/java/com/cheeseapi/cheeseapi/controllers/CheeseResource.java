@@ -2,16 +2,20 @@ package com.cheeseapi.cheeseapi.controllers;
 
 import com.cheeseapi.cheeseapi.exceptions.ResourceNotFoundException;
 import com.cheeseapi.cheeseapi.models.Cheese;
+import com.cheeseapi.cheeseapi.models.data.CategoryDao;
 import com.cheeseapi.cheeseapi.models.data.CheeseDao;
+import com.cheeseapi.cheeseapi.models.dto.CheeseDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+
 
 import javax.validation.Valid;
 
@@ -23,6 +27,12 @@ public class CheeseResource {
 
     @Autowired
     private CheeseDao cheeseDao;
+
+    @Autowired
+    private CategoryDao categoryDao;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @ApiOperation(value = "Returns list of all Cheeses in the system",
             produces = "application/json",
@@ -48,7 +58,9 @@ public class CheeseResource {
             response = Cheese.class)
     @PostMapping(value = "")
     @CrossOrigin
-    public ResponseEntity addCheese(@RequestBody @Valid Cheese cheese) {
+    public ResponseEntity addCheese(@RequestBody @Valid CheeseDto cheeseDto) {
+
+        Cheese cheese = convertToEntity(cheeseDto);
 
         cheeseDao.save(cheese);
 
@@ -150,6 +162,12 @@ public class CheeseResource {
         cheeseDao.delete(cheeseId);
 
         return ResponseEntity.noContent().build();
+    }
+
+    private Cheese convertToEntity(CheeseDto cheeseDto) {
+        Cheese cheese = modelMapper.map(cheeseDto, Cheese.class);
+        cheese.setCategory(categoryDao.findOne(cheeseDto.getCategoryId()));
+        return cheese;
     }
 
 }
