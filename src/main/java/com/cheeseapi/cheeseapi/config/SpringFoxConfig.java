@@ -32,8 +32,8 @@ public class SpringFoxConfig {
 
     private ApiInfo getApiInfo() {
         return new ApiInfo(
-                "Cheese MVC REST Api",
-                "Documenting Spring Boot REST API with Swagger using SpringFox.",
+                "Cheeses REST Api",
+                "A Spring Boot REST API to perform CRUD operations on Cheeses, Cheese Categories and Menus",
                 "1.0.0",
                 "TERMS OF SERVICE URL",
                 new Contact("Sara Saleem", "http://www.sarasaleem.com", "sara@sarasaleem.com"),
