@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "categories",uniqueConstraints={@UniqueConstraint(columnNames={"name"})})
 public class Category {
 
     @Id
