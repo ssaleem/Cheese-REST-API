@@ -36,13 +36,14 @@ Attributes in all the entities are annotated using Java Validation API annotatio
 - **Cheese Category-Cheese(many to one)**: Multiple cheeses can have same category. `@OneToMany` and `@ManyToOne` annotations from JPA are used to define a many-to-one relationship between the join tables.
 - **Cheese-Menu(many to many)**: A menu can have multiple cheeses and a cheese. can belong to multiple menus. `@ManyToMany` annotation from JPA is used to define a many-to-many relationship between the join tables.
     - _**Removing entities with bidirectional association**_: 
-    Using `@PreRemove` entity lifecycle hook, a callback is provided to remove all the menu associations for a particular cheese  . Callback<sup>[1](#myfootnote1)</sup> annotated with `@PreRemove` is executed before the entity manager's remove operation is actually executed or cascaded 
+    Using `@PreRemove` entity lifecycle hook, a callback is provided to remove all the menu associations for a particular cheese  . Callback<sup>[+](#myfootnote1)</sup> annotated with `@PreRemove` is executed before the entity manager's remove operation is actually executed or cascaded 
     
-    <a name="myfootnote1">1</a>: Callback methods are user defined methods that are attached to entity lifecycle events through annotations and are invoked automatically by JPA when these events occur.
+    <a name="myfootnote1">+</a>: Callback methods are user defined methods that are attached to entity lifecycle events through annotations and are invoked automatically by JPA when these events occur.
 
 
 ### Exception Handling
-- add about custom exceptions
+- A generic _ResourceNotFoundException_ is added to send custom error message to API consumer as a result of accessing un-available resources.
+- For category entity, category name column must be unique and this constraint is enforced by setting `uniqueConstraints` attribute on category table. A controller level exception handler is used in category resource to handle exceptions caused by adding a category name that already exists . This handler generates appropriate validation error messages as a result of `@UniqueConstraint` violation.
 
 ### Visual Documentation
 For documentation OpenAPI/Swagger 2 specification annotations are used. Springfox implementation of Swagger 2, along with Swagger UI libraries are used to generate interactive documentation.
@@ -50,7 +51,6 @@ For documentation OpenAPI/Swagger 2 specification annotations are used. Springfo
 ## Built with
 
 - [Spring Boot](https://spring.io/projects/spring-boot) - An opinionated view of the Spring platform with 'starter' dependencies to simplify build configuration and create stand-alone Spring applications
-- validation ?
 - [Spring Initializr](https://start.spring.io/) - A web based tool to quickly generate Spring Boot projects.
 - [Java Persistence API](https://docs.oracle.com/javaee/6/tutorial/doc/bnbpz.html) - Java Persistence API is a source to store business entities as relational entities. It shows how to define a Plain Old Java Object (POJO) as an entity and how to manage entities with relations.
 - [Java Validation API Annotations](https://docs.oracle.com/javaee/6/tutorial/doc/gircz.html) - The Bean Validation model is supported by constraints in the form of annotations placed on a field, method, or class of a JavaBeans component, such as a managed bean.
